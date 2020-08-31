@@ -1,0 +1,25 @@
+# Installing log2ram
+
+---
+  - name: Installing log2ram
+    hosts: all
+    remote_user: pi
+    become: true
+    tasks:
+      - name: Add repository
+        shell: echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list
+        args:
+          warn: no
+        changed_when: false  # Don't report changed status
+
+      - name: Add log2ram GPG apt Key
+        shell: wget -qO - https://azlux.fr/repo.gpg.key | sudo apt-key add -
+        args:
+          warn: no
+        changed_when: false  # Don't report changed status
+
+      - name: Update repositories cache and install log2ram package
+        apt:
+          name: log2ram
+          update_cache: yes
+

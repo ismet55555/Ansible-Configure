@@ -1,0 +1,36 @@
+# Updating and upgrading apt
+
+---
+  - name: Updating, Upgrading, Installing Basics Packages
+    hosts: all
+    remote_user: pi
+    become: true
+    tasks:
+      - name: Pinging all Pis
+        action: ping
+        tags: ping
+
+      - name: apt update
+        apt: 
+          update_cache: yes
+          force_apt_get: yes
+          cache_valid_time: 3600
+        tags: update
+
+      - name: apt upgrade
+        apt:
+          upgrade: dist
+          force_apt_get: yes
+        tags: upgrade
+
+      - name: Install apt packages
+        apt:
+          name:
+            - curl
+            - vim
+            - htop
+            - neofetch
+            - netcat
+          state: present
+          force_apt_get: "yes"
+        tags: apt-packages
