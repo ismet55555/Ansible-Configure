@@ -19,9 +19,3 @@ alias alert='notify-send --urgency=critical -i "$([ $? = 0 ] && echo terminal ||
 
 # git add and commit
 alias gitac='git add . && git commit -m "minor changes"'
-
-# pytest quick test
-alias pytestq='~/.bashrc_scripts/pytest_quick_test.sh'
-
-# DTSP VPN
-alias vpn_dtsp='sudo openvpn --config /home/ismet/Downloads/VPN/ismet-dtsp.ovpn'
