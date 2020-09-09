@@ -5,6 +5,8 @@
     hosts: all
     remote_user: pi
     become: true
+    gather_facts: True
+
     tasks:
       - name: Pinging all Pis
         action: ping

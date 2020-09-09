@@ -5,6 +5,8 @@
     hosts: all
     remote_user: pi
     become: true
+    gather_facts: True
+
     tasks:
       - name: Add repository
         shell: echo "deb http://packages.azlux.fr/debian/ buster main" | sudo tee /etc/apt/sources.list.d/azlux.list

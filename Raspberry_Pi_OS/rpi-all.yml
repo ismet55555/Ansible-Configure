@@ -4,6 +4,7 @@
 #       ansible pi3-argon -m setup -a "filter=ansible_mounts"
 
 ---
+  - import_playbook: rpi-config  # NEEDS TESTING AND VERIFYING
   - import_playbook: basics.yml
   - import_playbook: log2ram.yml
   - import_playbook: docker.yml
