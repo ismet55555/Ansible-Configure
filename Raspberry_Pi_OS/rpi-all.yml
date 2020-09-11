@@ -1,5 +1,15 @@
-# All Playbooks combined
+# All Playbooks Combined
 
+###############################################################################
+#
+# This playbook is the combination off multiple playbooks 
+# that are imported 
+#
+# You can comment out (# before line) any of the playbooks 
+# in order to skip it.
+#
+###############################################################################
+#
 # Check for disk size: 
 #       ansible pi3-argon -m setup -a "filter=ansible_mounts"
 
