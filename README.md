@@ -58,7 +58,7 @@ This way is much better if you are working with many remote hosts/devices.
    - This is only done once
    - `sudo chmod +x distribute_ssh_key.sh`
 
-5. Execuute the script
+5. Execute the script
    - `./distribute_ssh_key.sh`
 
 
@@ -68,11 +68,11 @@ This way is much better if you are working with many remote hosts/devices.
 
 This way is probably good enough for one or two remote hosts.
 
-1.Copy the SSH public key to the remote host/device
+1. Copy the SSH public key to the remote host/device
    - `ssh-copy-id -i <PATH/NAME OF PUBLIC KEY> <HOST IP or DNS NAME>`
    - Example: 
      - `ssh-copy-id -i /home/my-username/.ssh/my-cool-key 192.168.0.50`
-2. heck the SSH Connection (Should not have to enter password)
+2. Check the SSH Connection (Should not have to enter password)
    - `ssh -i <PATH/NAME OF PRIVATE KEY> <REMOTE USERNAME>@<HOST IP or DNS Name>`
    - Example:
      - `ssh -i /home/my-username/.ssh/my-cool-key pi@192.168.0.50`
