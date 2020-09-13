@@ -1,0 +1,14 @@
+# Shutting Down the System
+---
+  - name: Shutting Down The System
+    hosts: all
+    remote_user: pi
+    become: true
+    gather_facts: False
+
+    tasks:
+      - name: Shuttin' it Down!
+        command: shutdown -h now
+        tags: shutdown
+        when: ansible_facts['os_family'] == "Debian"
+        ignore_errors: 'yes'  # hush ...

@@ -5,6 +5,9 @@
 # This playbook is the combination off multiple playbooks 
 # that are imported 
 #
+# You can target only certain plays with its tag
+#   $ ansible-playbook rpi-all.yml tags basics
+#
 # You can comment out (# before line) any of the playbooks 
 # in order to skip it.
 #
