@@ -78,3 +78,7 @@ This way is probably good enough for one or two remote hosts.
      - `ssh -i /home/my-username/.ssh/my-cool-key pi@192.168.0.50`
 
 **SEMI-PRO TIP:** If you are using the keyname `id_rsa` you will not need the `-i` flag with the path to the key
+
+
+## Licence
+This project is licensed under the Apache 2.0 License - Please see the [LICENSE](LICENSE) file for details.
