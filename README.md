@@ -2,7 +2,7 @@
 Ansible playbooks and utility scripts to setup different systems.
 
 
-# Running an Ansible Playbooks
+# Running an Ansible Playbook
 You will find the ansible playbooks in `.yml` files. The following command will run an ansible playbook. This executed using the terminal.
 
 `ansible-playbook <PATH/NAME>.yml`
@@ -15,6 +15,8 @@ Examples:
 
 Some Useful Options:
 - `-K` - Ask for privellage escalation (aka sudo)
+- `--tags` - Only target the playbook tasks with specific tags
+- `--limit` - Only target specified hosts or host groups
 
 For more `ansible-playbook` options, checkout the amazing documentation:
 https://docs.ansible.com/ansible/2.7/cli/ansible-playbook.html
@@ -35,11 +37,11 @@ In fact, you probably need to do this for ansible to smoothly operate.
 
 ## Create a Private-Public Key-Pair (if needed)
 1. Install OpenSSH locally (if needed)
-   - `sudo apt-get install openssh-server` (if needed)
+   - `sudo apt-get install openssh-server`
 2. Generate the SSH private-public key-pair
     - `ssh-keygen`
     - Enter some name for the key-pair
-    - Don't need the password unless you are hosting TOP SECRET space tesla alien information
+    - Don't need the password unless you are really worried about the security of this system
     - The key-pair will be saved locally in the `~/.ssh` directory
 
 
@@ -55,7 +57,7 @@ This way is much better if you are working with many remote hosts/devices.
       REMOTE_HOST_USERNAME="<YOUR REMOTE HOSTS USERNAME HERE"
       REMOTE_HOST_PASSWORD="<YOUR REMOTE HOSTS PASSWORD HERE"
   ```
-4. Give the `distribute_ssh_key.sh` script exectutable permissions
+4. Give the `distribute_ssh_key.sh` script executable permissions
    - This is only done once
    - `sudo chmod +x distribute_ssh_key.sh`
 
@@ -72,7 +74,7 @@ This way is probably good enough for one or two remote hosts.
 1. Copy the SSH public key to the remote host/device
    - `ssh-copy-id -i <PATH/NAME OF PUBLIC KEY> <HOST IP or DNS NAME>`
    - Example: 
-     - `ssh-copy-id -i /home/my-username/.ssh/my-cool-key 192.168.0.50`
+     - `ssh-copy-id -i /home/my-username/.ssh/my-cool-key.pub 192.168.0.50`
 2. Check the SSH Connection (Should not have to enter password)
    - `ssh -i <PATH/NAME OF PRIVATE KEY> <REMOTE USERNAME>@<HOST IP or DNS Name>`
    - Example:
@@ -81,5 +83,5 @@ This way is probably good enough for one or two remote hosts.
 **SEMI-PRO TIP:** If you are using the keyname `id_rsa` you will not need the `-i` flag with the path to the key
 
 
-## Licence
+# Licence
 This project is licensed under the Apache 2.0 License - Please see the [LICENSE](LICENSE) file for details.
