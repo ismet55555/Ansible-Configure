@@ -9,6 +9,7 @@ You will find the ansible playbooks in `.yml` files. The following command will 
 
 Examples:
 - `ansible-playbook Raspberry_Pi_OS/rpi-all.yml`
+- `ansible-playbook Raspberry_Pi_OS/rpi-all.yml --tags basics
 - `ansible-playbook Raspberry_Pi_OS/docker.yml --limit cluster-pi-group`
 - `ansible-playbook Raspberry_Pi_OS/rpi-config.yml --limit cluster-pi-1`
 
