@@ -32,7 +32,18 @@ To not have to enter a password every time you SSH into a device, you can create
 In fact, you probably need to do this for ansible to smoothly operate. 
 
 
-## Do It the Cool Kids Automatic and Scalable Way
+## Create a Private-Public Key-Pair (if needed)
+1. Install OpenSSH locally (if needed)
+   - `sudo apt-get install openssh-server` (if needed)
+2. Generate the SSH private-public key-pair
+    - `ssh-keygen`
+    - Enter some name for the key-pair
+    - Don't need the password unless you are hosting TOP SECRET space tesla alien information
+    - The key-pair will be saved locally in the `~/.ssh` directory
+
+
+
+## Distribute the Public Key the Cool Kids Automatic and Scalable Way
 This way is much better if you are working with many remote hosts/devices.
 
 1. Go to the `Utilities/Distribute_SSH_Keys` directory
@@ -53,22 +64,15 @@ This way is much better if you are working with many remote hosts/devices.
 
 
 
-## Do It the Reliable Manual Way
+## Distribute the Public Key the Reliable Manual Way
 
 This way is probably good enough for one or two remote hosts.
 
-1. Install OpenSSH locally (if needed)
-   - `sudo apt-get install openssh-server` (if needed)
-2. Generate the SSH private-public key-pair
-    - `ssh-keygen`
-    - Enter some name for the key-pair
-    - Don't need the password unless you are hosting TOP SECRET space tesla alien information
-    - The key-pair will be saved locally in the `~/.ssh` directory
-3. Copy the SSH public key to the remote host/device
+1.Copy the SSH public key to the remote host/device
    - `ssh-copy-id -i <PATH/NAME OF PUBLIC KEY> <HOST IP or DNS NAME>`
    - Example: 
      - `ssh-copy-id -i /home/my-username/.ssh/my-cool-key 192.168.0.50`
-4. Check the SSH Connection (Should not have to enter password)
+2. heck the SSH Connection (Should not have to enter password)
    - `ssh -i <PATH/NAME OF PRIVATE KEY> <REMOTE USERNAME>@<HOST IP or DNS Name>`
    - Example:
      - `ssh -i /home/my-username/.ssh/my-cool-key pi@192.168.0.50`
