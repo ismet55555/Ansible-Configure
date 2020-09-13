@@ -4,9 +4,6 @@
 #     https://www.raspberrypi.org/documentation/configuration/raspi-config.md
 #     https://github.com/RPi-Distro/raspi-config/blob/master/raspi-config
 
-# TODO: Add change of password for pi user
-
-
 ---
 - name: Update and Modify raspi-config
   hosts: all
@@ -15,16 +12,17 @@
   gather_facts: True
   
   vars:
-    REBOOT: True  # Reboot at the end of this playbook
-    UPDATE: True  # Update raspi-config itself
+    REBOOT: True         # Reboot at the end of this playbook
+    UPDATE: True         # Update raspi-config itself
+    BOOTBEHAVIOUR: "B2"  # B1:cli, B2:cli autologin, B3:desktop, B4:desktop autologin
 
     CHANGE_USER_PASSWORD: False # Changing the pi user password if true
-    USER_PASSWORD: "00000"      # Password for the default user, "pi"
+    USER_PASSWORD: "raspberry"  # Password for the default user, "pi"
     
-    CHANGE_HOSTNAME: False # Change the hostname from default "raspberrypi"
-    HOSTNAME: "MyCoolRPI"  # Hostname alias for this device
-    BOOTBEHAVIOUR: "B2"    # B1:cli, B2:cli autologin, B3:desktop, B4:desktop autologin
+    CHANGE_HOSTNAME: True                # Change the hostname from default "raspberrypi"
+    HOSTNAME: "{{ inventory_hostname }}" # Hostname alias for this device to inventory hostname
     
+    CHANGE_LOCALE_INFO: False     # Change any of the locale/location/keyboard information
     LOCALE: "en_US.UTF-8"         # Locale Designation
     TIMEZONE: "America/New_York"  # See: https://docs.aws.amazon.com/redshift/latest/dg/time-zone-names.html
     XKBLAYOUT: "us"               # Keyboard Layout
@@ -63,7 +61,7 @@
       user:
         name: pi
         password: "{{ USER_PASSWORD }}"
-        when: CHANGE_USER_PASSWORD == True
+      when: CHANGE_USER_PASSWORD == True
 
     # Get some Basic Info
     - name: Get Raspberry Pi Type
@@ -79,18 +77,18 @@
 #2 Network Options
 
     #N1 Hostname
-    - name: Get hostname
-      shell: "raspi-config nonint get_hostname"
+    - name: Get Hostname
+      shell: raspi-config nonint get_hostname
       register: pi_hostname
       changed_when: False
       
-    - name: Print current hostname
+    - name: Print Current Hostname
       debug:
-        msg: "Current hostname: {{ pi_hostname.stdout }}"
+        msg: "Hostname current: {{ pi_hostname.stdout }} | target: {{ HOSTNAME }}"
 
-    - name: Change hostname
-      shell: "raspi-config nonint do_hostname {{ HOSTNAME }}"
-      when: (CHANGE_HOSTNAME == True) and (pi_hostname.stdout != HOSTNAME)
+    - name: Change Hostname
+      shell: raspi-config nonint do_hostname {{ HOSTNAME }}
+      when: CHANGE_HOSTNAME == True
 
     #N2 Wi-fi
     - name: Set WiFi credentials
@@ -173,14 +171,17 @@
     #I1 Change Locale
     - name: Change locale
       shell: "raspi-config nonint do_change_locale {{ LOCALE }}"
+      when: CHANGE_LOCALE_INFO == True
 
     #I2 Change Timezone
     - name: Change timezone
       shell: "raspi-config nonint do_change_timezone {{ TIMEZONE }}"
+      when: CHANGE_LOCALE_INFO == True
 
     #I3 Change Keyboard Layout
     - name: Change keyboard layout
       shell: "raspi-config nonint do_configure_keyboard {{ XKBLAYOUT }}"
+      when: CHANGE_LOCALE_INFO == True
 
     #I4 Change Wi-fi Country
     - name: Get WiFi country
@@ -429,12 +430,12 @@
       async: 1
       poll: 0
       notify:
-        - wait-for-reboot
+        - Wait-For-Device-Reboot
       when: REBOOT == True
 
   # Playbook Handlers
   handlers:
-    - name: wait-for-reboot
+    - name: Wait-For-Device-Reboot
       wait_for_connection:
         delay: "5"
         timeout: "300"

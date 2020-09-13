@@ -14,7 +14,18 @@
 #       ansible pi3-argon -m setup -a "filter=ansible_mounts"
 
 ---
-  - import_playbook: rpi-config  # NEEDS TESTING AND VERIFYING
-  - import_playbook: basics.yml
-  - import_playbook: log2ram.yml
-  - import_playbook: docker.yml
+  - name: Configuring raspi-config for Raspberry Pis  # Review settings in rpi-config.yml
+    import_playbook: rpi-config.yml
+    tags: rpi-config
+
+  - name: Updating and Installing Basic Utilities
+    import_playbook: basics.yml
+    tags: basics
+
+  - name: Installing log2ram SD Saver
+    import_playbook: log2ram.yml
+    tags: log2ram
+
+  - name: Installing Docker and Docker Compose
+    import_playbook: docker.yml
+    tags: docker
