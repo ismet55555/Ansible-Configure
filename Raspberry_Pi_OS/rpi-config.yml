@@ -41,7 +41,7 @@
     ONEWIRE: False  # 1-Wire Interface
     RGPIO: False    # Enable remote access to GPIO Pins
 
-    MEMSPLIT: "64"    # Set memory split for GPU (eg. 16/32/64/128/256 MB)
+    MEMSPLIT: "16"    # Set memory split for GPU (eg. 16/32/64/128/256 MB)
     NETNAMES: False   # Network interface names - Enable/Disable predictable network interface names
     BOOTWAIT: 1       # Wait for network at boot (0: Enabled, 1: Disabled)  TODO: Make True/False
     BOOTSPLASH: 1     # Show the splash screen (0:Enabled, 1: Disabled)     TODO: Make True/False
