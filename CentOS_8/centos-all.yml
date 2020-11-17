@@ -1,0 +1,26 @@
+# All Playbooks Combined
+
+###############################################################################
+#
+# This playbook is the combination off multiple playbooks 
+# that are imported 
+#
+# You can target only certain plays with its tag
+#   $ ansible-playbook centos-all.yml tags basics
+#
+# You can comment out (# before line) any of the playbooks 
+# in order to skip it.
+#
+###############################################################################
+#
+# Check for disk size: 
+#       ansible pi3-argon -m setup -a "filter=ansible_mounts"
+
+---
+  - name: Updating and Installing Basic Utilities
+    import_playbook: basics.yml
+    tags: basics
+
+  # - name: Installing Docker and Docker Compose
+  #   import_playbook: docker.yml
+  #   tags: docker

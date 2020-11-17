@@ -1,0 +1,30 @@
+# Updating and upgrading dnf
+# NOTE: CentOS 7 uses yum as a package manager
+
+---
+  - name: Updating, Upgrading, Installing Basics Packages (CentOS 8)
+    hosts: all
+    remote_user: ismet
+    become: true
+    gather_facts: True
+
+    tasks:
+      - name: Pinging all CentOS Hosts
+        action: ping
+        tags: ping
+
+      - name: Upgrade all packages
+        dnf:
+          name: "*"
+          state: latest
+
+      - name: Install yum packages
+        dnf:
+          name:
+            - curl
+            - vim
+            - htop
+            - neofetch
+            - nmap
+          state: present
+        tags: yum-packages

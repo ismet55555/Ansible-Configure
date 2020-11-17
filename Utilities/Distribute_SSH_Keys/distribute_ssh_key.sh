@@ -27,11 +27,11 @@
 ###############################################################################
 
 # Specify the location of the public key
-SSH_PUBLIC_KEY_LOCATION="/home/ismet/.ssh/pi-key.pub"
+SSH_PUBLIC_KEY_LOCATION="/home/ismet/.ssh/id_rsa.pub"
 
 # Specify the remote user and credentials
-REMOTE_HOST_USERNAME="pi"
-REMOTE_HOST_PASSWORD="clusterpi"
+REMOTE_HOST_USERNAME="ismet"
+REMOTE_HOST_PASSWORD="YO PASSWORD HRRR"
 
 # Specify the remote SSH port (Typically always 22)
 REMOTE_SSH_PORT=22
