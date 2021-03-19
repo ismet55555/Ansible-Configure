@@ -53,7 +53,7 @@ This way is much better if you are working with many remote hosts/devices.
 2. In `remote_host_list.txt`, add the remote host/device IP addresses to the list
 3. Specify the following in `distribute_ssh_key.sh`
   ```bash
-      SSH_PUBLIC_KEY_LOCATION="/home/USERNAME/.ssh/public-key.pub"
+      SSH_PUBLIC_KEY_LOCATION="/home/<USERNAME ON DEVICE>/.ssh/public-key.pub"
       REMOTE_HOST_USERNAME="<YOUR REMOTE HOSTS USERNAME HERE"
       REMOTE_HOST_PASSWORD="<YOUR REMOTE HOSTS PASSWORD HERE"
   ```
