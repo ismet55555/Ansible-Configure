@@ -27,11 +27,11 @@
 ###############################################################################
 
 # Specify the location of the public key
-SSH_PUBLIC_KEY_LOCATION="/home/ismet/.ssh/id_rsa.pub"
+SSH_PUBLIC_KEY_LOCATION="/home/ismet/.ssh/pi-key.pub"
 
 # Specify the remote user and credentials
-REMOTE_HOST_USERNAME="ismet"
-REMOTE_HOST_PASSWORD="YO PASSWORD HRRR"
+REMOTE_HOST_USERNAME="pi"
+REMOTE_HOST_PASSWORD="raspberry"
 
 # Specify the remote SSH port (Typically always 22)
 REMOTE_SSH_PORT=22
@@ -89,7 +89,7 @@ for remote_host_ip in `cat remote_host_list.txt`; do
         successful_hosts+=("$remote_host_ip")
     else
         echo "[$(date)] Deploying public key to host '$remote_host_ip' ..."
-        if sshpass -p $REMOTE_HOST_PASSWORD ssh-copy-id -o StrictHostKeyChecking=no -f -i $SSH_PUBLIC_KEY_LOCATION $REMOTE_HOST_USERNAME@$remote_host_ip -p $REMOTE_SSH_PORT
+        if sshpass -p $REMOTE_HOST_PASSWORD ssh-copy-id -f -i $SSH_PUBLIC_KEY_LOCATION -p $REMOTE_SSH_PORT -o StrictHostKeyChecking=no $REMOTE_HOST_USERNAME@$remote_host_ip 
         then
             echo "Success: I found IP address in file."
             successful=$((successful + 1))

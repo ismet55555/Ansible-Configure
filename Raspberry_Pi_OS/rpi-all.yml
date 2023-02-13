@@ -29,6 +29,6 @@
     import_playbook: log2ram.yml
     tags: log2ram
 
-  - name: Installing Docker and Docker Compose
-    import_playbook: docker.yml
-    tags: docker
+  # - name: Installing Docker and Docker Compose
+  #   import_playbook: docker.yml
+  #   tags: docker

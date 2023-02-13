@@ -162,8 +162,8 @@
       debug: 
         msg: "Boot splash status is: {{ boot_splash.stdout }}"
 
-    - name: Set boot splash
-      shell: "raspi-config nonint do_boot_splash {{ BOOTSPLASH }}"
+    # - name: Set boot splash
+    #   shell: "raspi-config nonint do_boot_splash {{ BOOTSPLASH }}"
 
 
 #4 Localisation Options
